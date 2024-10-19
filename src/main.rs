@@ -238,6 +238,43 @@ fn path_range_cmd(
     start: usize,
     end: usize,
 ) -> Result<()> {
+    // output:
+        // start_rank: 13
+        // end_rank: 27
+        // cardinality: 14
+        // ------
+        // step_ix	node	pos
+        // 12	4935	1	4936	63
+        // 13	4934	1	4935	108
+        // 14	4932	1	4933	109
+        // 15	4930	1	4931	110
+        // 16	4929	1	4930	111
+        // 17	4928	1	4929	131
+        // 18	4926	1	4927	132
+        // 19	4925	1	4926	135
+        // 20	4923	1	4924	136
+        // 21	4921	1	4922	137
+        // 22	4920	1	4921	179
+        // 23	4918	1	4919	180
+        // 24	4915	1	4916	191
+        // 25	4914	1	4915	192
+        // 26	4913	1	4914	193
+        // ------------
+        // 12	4936	63
+        // 13	4935	108
+        // 14	4933	109
+        // 15	4931	110
+        // 16	4930	111
+        // 17	4929	131
+        // 18	4927	132
+        // 19	4926	135
+        // 20	4924	136
+        // 21	4922	137
+        // 22	4921	179
+        // 23	4919	180
+        // 24	4916	191
+        // 25	4915	192
+        // 26	4914	193
     let path = path_index
         .path_names
         .get(&path_name)
@@ -267,7 +304,9 @@ fn path_range_cmd(
         offsets.iter().zip(steps).enumerate().skip(skip).take(take)
     {
         let node = step.node + path_index.segment_id_range.0 as u32;
-        println!("{step_ix}\t{node}\t{pos}");
+		let aa = step.node;
+		let bb = path_index.segment_id_range.0 as u32;
+        println!("{step_ix}\t{aa}\t{bb}\t{node}\t{pos}");
     }
 
     println!("------------");

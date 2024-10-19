@@ -205,12 +205,26 @@ impl PathIndex {
         }
 
         Ok(Self {
+            // 简单来说这段程序为GFA文件建立索引，从而快速索引坐标
+            // 读取GFA文件P开头的行，记录path_name和node 的偏移量
+            // let mut path_names = BTreeMap::default();
+            // path_names.insert(name.to_string(), path_steps.len()); (path_1：1 ,path_2:2，path_3:3)
             path_names,
+            // let step = PathStep {
+            //     node: seg_ix as u32,
+            //     reverse: is_rev,
+            // };
+            // parsed_steps.push(step);
+            // path_steps.push(parsed_steps);
             path_steps,
+            //  let mut offsets = RoaringBitmap::new();
+            //  offsets.push(pos as u32); Node positios of line_refgenome
+            //  let mut path_step_offsets: Vec<RoaringBitmap> = Vec::new();
+            //  path_step_offsets.push(offsets);
             path_step_offsets,
 
-            segment_id_range: seg_id_range,
-            segment_lens: seg_lens,
+            segment_id_range: seg_id_range, // Node ID range of the segments in the GFA file (1, MAX)
+            segment_lens: seg_lens, // Node lengths of the segments in the GFA file [1,4,3,32,32,32]
         })
     }
 }

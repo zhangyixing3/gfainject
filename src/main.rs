@@ -300,6 +300,18 @@ fn path_range_cmd(
     let start_rank = offsets.rank(start as u32);
     let end_rank = offsets.rank(end as u32);
 
+    // 例子：假设数据结构和输入
+    // 假设：
+    // offsets = [0, 10, 20, 30, 40, 50]，表示每个步骤的偏移位置。
+    // steps = [{node: 1}, {node: 2}, {node: 3}, {node: 4}, {node: 5}, {node: 6}]，表示路径步骤。
+    // start = 15，end = 45
+
+    // 运行流程：
+    // rank(15) -> 2（表示位置 15 前有两个有效项）。
+    // rank(45) -> 5（表示位置 45 前有五个有效项）。
+    // skip = 2 - 1 = 1，take = 5 - 1 = 4。
+    // 遍历 offsets 和 steps 的第 2 项到第 5 项
+
     let cardinality = offsets.range_cardinality((start as u32)..(end as u32));
 
     println!("start_rank: {start_rank}");
